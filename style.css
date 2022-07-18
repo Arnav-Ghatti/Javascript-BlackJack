@@ -27,4 +27,43 @@ body {
     justify-content: center;
 }
 
+.data-div {
+    background-color: var(--light-bg);
+    padding: 50px 0;
+    width: 250px;
+    margin: 0 25px 50px;
+}
+
 /* Selectors */
+h1 {
+    margin: 50px 0;
+    font-weight: 900;
+    letter-spacing: 5px;
+    font-size: 3rem;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: var(--accent);
+    width: 150px;
+    margin: 25px auto;
+    padding: 10px 0;
+    display: block;
+    font-size: 1.15rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* Classes and Ids */
+.cards {
+    font-size: 1.15rem;
+}
+
+.total {
+    font-weight: 300;
+}
