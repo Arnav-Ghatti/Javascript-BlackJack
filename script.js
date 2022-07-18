@@ -2,18 +2,26 @@
 var playerCards = [];
 var compCards = [];
 
+var playerCardsTag = document.getElementById("player-cards");
+var playerTotalTag = document.getElementById("player-total");
+
+var compCardsTag = document.getElementById("comp-cards");
+var compTotalTag = document.getElementById("comp-total");
+
+var standBtn = document.getElementById("stand");
+var hitBtn = document.getElementById("hit");
+
 // Getting user name
 
 var userName = prompt("Enter your name.");
 
 var nameH2 = document.getElementById("player-name");
-if (userName != "") {
+if (userName != "" && userName != null) {
     nameH2.innerHTML = userName;
 } else {
     nameH2.innerHTML = "User";
 }
 
-// Generating Random Numbers
 function genCard() {
     var randNum = Math.random();
     randNum = Math.floor(randNum * 11) + 1 // Generates numbers between 1, 11 (included)
@@ -31,6 +39,23 @@ function sum(arr) {
     return s;
 }
 
+function displayData() {
+    // Displaying Cards
+    playerCardsTag.innerHTML = "Your cards: " + playerCards.join();
+    compCardsTag.innerHTML = "Your cards: " + compCards.join();
+
+    // Displaying Total
+    var playerTotal = sum(playerCards);
+    playerTotalTag.innerHTML = "Total = " + playerTotal;
+
+    var compTotal = sum(compCards);
+    compTotalTag.innerHTML = "Total = " + compTotal;
+}
+
+function disableBtns() {
+    
+}
+
 // Initialising
 for (var i = 0; i < 2; i++) {
     playerCards.push(genCard());
@@ -40,18 +65,19 @@ for (var i = 0; i < 2; i++) {
     compCards.push(genCard());
 }
 
-// Displaying Cards
-var playerCardsTag = document.getElementById("player-cards");
-playerCardsTag.innerHTML = "Your cards: " + playerCards.join();
+displayData();
 
-var compCardsTag = document.getElementById("comp-cards");
-compCardsTag.innerHTML = "Your cards: " + compCards.join();
+// Button Functionality
+hitBtn.addEventListener("click", function () {
+    playerCards.push(genCard());
+    displayData();
+})
 
-// Displaying Total
-var playerTotal = sum(playerCards);
-var playerTotalTag = document.getElementById("player-total");
-playerTotalTag.innerHTML = "Total = " + playerTotal;
+standBtn.addEventListener("click", function () {
+    while (sum(compCards) < 17) {
+        compCards.push(genCard());
+    }
+    displayData();
 
-var compTotal = sum(compCards);
-var compTotalTag = document.getElementById("comp-total");
-compTotalTag.innerHTML = "Total = " + compTotal;
+    disableBtns();
+})
