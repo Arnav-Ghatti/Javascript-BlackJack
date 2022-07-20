@@ -52,6 +52,59 @@ function displayData() {
     compTotalTag.innerHTML = "Total = " + compTotal;
 }
 
+function checkConds(stand) {
+
+    
+    if (sum(playerCards) > 21) {
+        return false;
+    }
+    if (sum(compCards) > 21) {
+        return true;
+    }
+    
+    if(stand == true) {
+        if (sum(playerCards) > sum(compCards)) {
+            return true;
+        }
+        if (sum(playerCards) < sum(compCards)) {
+            return false;
+        }
+        
+        if (sum(playerCards) == 21) {
+            return true;
+        }
+        if (sum(compCards) == 21) {
+            return false;
+        }
+    }
+}
+
+function displayResults(player) {
+    if (player === true) {
+        alert("You Win :)");
+    } else if (player === false) {
+        alert("You Lose :(")
+    } else {
+        return
+    }
+}
+
+
+// Button Functionality
+hitBtn.addEventListener("click", function () {
+    playerCards.push(genCard());
+    displayData();
+    displayResults(checkConds(false));
+})
+
+standBtn.addEventListener("click", function () {
+    while (sum(compCards) < 17) {
+        compCards.push(genCard());
+    }
+    displayData();
+    displayResults(checkConds(true));
+})
+
 // Initialising
 for (var i = 0; i < 2; i++) {
     playerCards.push(genCard());
@@ -62,16 +115,4 @@ for (var i = 0; i < 2; i++) {
 }
 
 displayData();
-
-// Button Functionality
-hitBtn.addEventListener("click", function () {
-    playerCards.push(genCard());
-    displayData();
-})
-
-standBtn.addEventListener("click", function () {
-    while (sum(compCards) < 17) {
-        compCards.push(genCard());
-    }
-    displayData();
-})
+displayResults(checkConds(false));
