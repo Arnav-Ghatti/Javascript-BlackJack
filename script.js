@@ -52,10 +52,6 @@ function displayData() {
     compTotalTag.innerHTML = "Total = " + compTotal;
 }
 
-function disableBtns() {
-    
-}
-
 // Initialising
 for (var i = 0; i < 2; i++) {
     playerCards.push(genCard());
@@ -78,6 +74,4 @@ standBtn.addEventListener("click", function () {
         compCards.push(genCard());
     }
     displayData();
-
-    disableBtns();
 })
