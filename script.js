@@ -1,12 +1,12 @@
 // Card Data
 var playerCards = [];
-var compCards = [];
+var dealerCards = [];
 
 var playerCardsTag = document.getElementById("player-cards");
 var playerTotalTag = document.getElementById("player-total");
 
-var compCardsTag = document.getElementById("comp-cards");
-var compTotalTag = document.getElementById("comp-total");
+var dealerCardsTag = document.getElementById("dealer-cards");
+var dealerTotalTag = document.getElementById("dealer-total");
 
 var standBtn = document.getElementById("stand");
 var hitBtn = document.getElementById("hit");
@@ -42,14 +42,14 @@ function sum(arr) {
 function displayData() {
     // Displaying Cards
     playerCardsTag.innerHTML = "Your cards: " + playerCards.join();
-    compCardsTag.innerHTML = "Your cards: " + compCards.join();
+    dealerCardsTag.innerHTML = "Your cards: " + dealerCards.join();
 
     // Displaying Total
     var playerTotal = sum(playerCards);
     playerTotalTag.innerHTML = "Total = " + playerTotal;
 
-    var compTotal = sum(compCards);
-    compTotalTag.innerHTML = "Total = " + compTotal;
+    var dealerTotal = sum(dealerCards);
+    dealerTotalTag.innerHTML = "Total = " + dealerTotal;
 }
 
 function checkConds(stand) {
@@ -58,22 +58,22 @@ function checkConds(stand) {
     if (sum(playerCards) > 21) {
         return false;
     }
-    if (sum(compCards) > 21) {
+    if (sum(dealerCards) > 21) {
         return true;
     }
     
     if(stand == true) {
-        if (sum(playerCards) > sum(compCards)) {
+        if (sum(playerCards) > sum(dealerCards)) {
             return true;
         }
-        if (sum(playerCards) < sum(compCards)) {
+        if (sum(playerCards) < sum(dealerCards)) {
             return false;
         }
         
         if (sum(playerCards) == 21) {
             return true;
         }
-        if (sum(compCards) == 21) {
+        if (sum(dealerCards) == 21) {
             return false;
         }
     }
@@ -98,8 +98,8 @@ hitBtn.addEventListener("click", function () {
 })
 
 standBtn.addEventListener("click", function () {
-    while (sum(compCards) < 17) {
-        compCards.push(genCard());
+    while (sum(dealerCards) < 17) {
+        dealerCards.push(genCard());
     }
     displayData();
     displayResults(checkConds(true));
@@ -111,7 +111,7 @@ for (var i = 0; i < 2; i++) {
 }
 
 for (var i = 0; i < 2; i++) {
-    compCards.push(genCard());
+    dealerCards.push(genCard());
 }
 
 displayData();
