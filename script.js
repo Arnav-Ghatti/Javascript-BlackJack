@@ -8,8 +8,12 @@ var playerTotalTag = document.getElementById("player-total");
 var dealerCardsTag = document.getElementById("dealer-cards");
 var dealerTotalTag = document.getElementById("dealer-total");
 
+var playerDataCard = document.getElementById("player-data");
+var dealerDataCard = document.getElementById("dealer-data");
+
 var standBtn = document.getElementById("stand");
 var hitBtn = document.getElementById("hit");
+var title = document.getElementById("title");
 
 // Getting user name
 
@@ -54,39 +58,62 @@ function displayData() {
 
 function checkConds(stand) {
 
-    
+
     if (sum(playerCards) > 21) {
-        return false;
+        return [false, "You went over"];
     }
     if (sum(dealerCards) > 21) {
-        return true;
+        return [true, "The dealer went over"];
     }
-    
-    if(stand == true) {
+
+    if (stand == true) {
         if (sum(playerCards) > sum(dealerCards)) {
-            return true;
+            return [true, "You win"];
+        } else if (sum(playerCards) < sum(dealerCards)) {
+            return [false, "You lose"];
+        } else {
+            return [null, "Tie!"]
         }
-        if (sum(playerCards) < sum(dealerCards)) {
-            return false;
-        }
-        
-        if (sum(playerCards) == 21) {
-            return true;
-        }
-        if (sum(dealerCards) == 21) {
-            return false;
-        }
+    }
+
+    if (sum(playerCards) == 21) {
+        return [true, "Blackjack!"];
+    }
+    if (sum(dealerCards) == 21) {
+        return [false, "Blackjack!"];
     }
 }
 
-function displayResults(player) {
-    if (player === true) {
-        alert("You Win :)");
-    } else if (player === false) {
-        alert("You Lose :(")
+function disableBtns() {
+    standBtn.disabled = true;
+    hitBtn.disabled = true;
+
+    standBtn.classList.add("disabled");
+    hitBtn.classList.add("disabled")
+}
+
+function showWinner(playerWin) {
+    if (playerWin === true) {
+        playerDataCard.classList.add("win");
+        dealerDataCard.classList.add("lose")
+    } else {
+        dealerDataCard.classList.add("win");
+        playerDataCard.classList.add("lose");
+    }
+}
+
+function displayResults(stat) {
+    if (stat[0] === true) {
+        disableBtns();
+        showWinner(true);
+    } else if (stat[0] === false) {
+        disableBtns();
+        showWinner(false);
     } else {
         return
     }
+
+    title.innerHTML = stat[1]
 }
 
 
