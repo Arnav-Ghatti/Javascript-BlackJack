@@ -84,3 +84,15 @@ button {
 .lose {
     background-color: var(--wrong);
 }
+
+.cr {
+    font-weight: 300;
+    color: var(--font-color);
+    margin: 20px 0;
+}
+
+@media (max-width: 500px) {
+    .container {
+        display: inline-block;
+    }
+}
