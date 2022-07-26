@@ -14,6 +14,7 @@ var dealerDataCard = document.getElementById("dealer-data");
 var standBtn = document.getElementById("stand");
 var hitBtn = document.getElementById("hit");
 var title = document.getElementById("title");
+var restart = document.getElementById("restart");
 
 // Getting user name
 
@@ -109,11 +110,12 @@ function displayResults(stat) {
     } else if (stat[0] === false) {
         disableBtns();
         showWinner(false);
-    } else {
-        return
+    } else if (stat[0] === null) {
+        console.log("tie");
     }
 
-    title.innerHTML = stat[1]
+    title.innerHTML = stat[1];
+    restart.innerHTML = "Ctrl + R to restart";
 }
 
 
